@@ -2,7 +2,6 @@ import os
 import shutil
 import re
 import sys
-# C:\Users\vgolo\PycharmProjects\File_Sorting\mr_bin
 
 def normalize(file):
     normalize_name = file.lower()
@@ -39,14 +38,11 @@ def sort(path):
             place(file, answer, address)
             normalize(file)
 
-if len(sys.argv) != 2:
-    print(1)
-else:
+if len(sys.argv):
     path = sys.argv[1]
     if os.path.exists(path):
         sort(path)
         print("Sorting complete.")
-# sort(path)
 
 
 
