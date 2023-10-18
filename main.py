@@ -1,7 +1,7 @@
 import os
 import shutil
 import re
-
+import sys
 # C:\Users\vgolo\PycharmProjects\File_Sorting\mr_bin
 
 def normalize(file):
@@ -33,15 +33,20 @@ def define(file):
 
 
 def sort(path):
-    for adress, dirs, files in os.walk(path):
+    for address, dirs, files in os.walk(path):
         for file in files:
             answer = define(file)
-            place(file, answer, adress)
+            place(file, answer, address)
             normalize(file)
 
-
-path = input("Введите путь к папке: ")
-sort(path)
+if len(sys.argv) != 2:
+    print(1)
+else:
+    path = sys.argv[1]
+    if os.path.exists(path):
+        sort(path)
+        print("Sorting complete.")
+# sort(path)
 
 
 
