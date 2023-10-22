@@ -11,9 +11,9 @@ def normalize(file):
 
 def place(file, answer, path):
     path_first = os.path.join(path, file)
-    path_second = os.path.join(path, answer, file)
-    if not os.path.exists(os.path.join(path, answer)):
-        os.makedirs(os.path.join(path, answer))
+    path_second = os.path.join(answer, file)
+    if not os.path.exists(os.path.join(answer)):
+        os.makedirs(os.path.join(answer))
     shutil.move(path_first, path_second)
 
 def define(file):
