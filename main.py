@@ -10,8 +10,8 @@ def normalize(file):
     return normalize_name
 
 def place(file, answer, path):
-    path_first = os.path.join(path, file)
-    path_second = os.path.join(path, answer, file)
+    path_first = os.path.join(path)
+    path_second = os.path.join(path, answer)
     if not os.path.exists(os.path.join(path, answer)):
         os.makedirs(os.path.join(path, answer))
     if os.path.exists(os.path.join(path, answer)):
