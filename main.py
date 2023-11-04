@@ -11,10 +11,21 @@ def normalize(file):
 
 def place(file, answer, path):
     path_first = os.path.join(path, file)
-    path_second = os.path.join(answer, file)
-    if not os.path.exists(os.path.join(answer)):
-        os.makedirs(os.path.join(answer))
-    shutil.move(path_first, path_second)
+    path_second = os.path.join(path, answer, file)
+    if not os.path.exists(os.path.join(path, answer)):
+        os.makedirs(os.path.join(path, answer))
+    if os.path.exists(os.path.join(path, answer)):
+        shutil.move(path_first, path_second)
+
+
+def del_dir(answer, path):
+    for root, dirs, files in os.walk(path, topdown=False):
+        for dir in dirs:
+            dir_path = os.path.join(path, answer)
+            if not os.listdir(dir_path):
+                os.rmdir(dir_path)
+                print(f"Removed empty folder: {dir_path}")
+
 
 def define(file):
     if ".jpeg" in file or ".png" in file or ".jpg" in file or ".svg" in file or ".gif" in file:
@@ -34,16 +45,13 @@ def define(file):
 def sort(path):
     for address, dirs, files in os.walk(path):
         for file in files:
+            # normalize(file)
             answer = define(file)
             place(file, answer, address)
-            normalize(file)
+            del_dir(answer, path)
 
 if len(sys.argv):
     path = sys.argv[1]
     if os.path.exists(path):
         sort(path)
         print("Sorting complete.")
-
-
-
-
