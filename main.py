@@ -9,13 +9,15 @@ def normalize(file):
     normalize_name = re.sub(r'[^a-z0-9_.]', '_', normalize_name)
     return normalize_name
 
-def place(file, answer, path):
-    path_first = os.path.join(path)
-    path_second = os.path.join(path, answer)
-    if not os.path.exists(os.path.join(path, answer)):
-        os.makedirs(os.path.join(path, answer))
+def place(file, answer, path, root_path):
+    path_first = os.path.join(path, file)
+    path_second = os.path.join(root_path, answer, file)
+    print(file, answer, path)
+    if not os.path.exists(os.path.join(root_path, answer)):
+        os.makedirs(os.path.join(root_path, answer))
     if os.path.exists(os.path.join(path, answer)):
         shutil.move(path_first, path_second)
+
 
 
 def del_dir(answer, path):
@@ -47,7 +49,7 @@ def sort(path):
         for file in files:
             # normalize(file)
             answer = define(file)
-            place(file, answer, address)
+            place(file, answer, address, path)
             del_dir(answer, path)
 
 if len(sys.argv):
